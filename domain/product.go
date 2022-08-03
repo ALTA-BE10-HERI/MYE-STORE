@@ -24,7 +24,7 @@ type UserAdmin struct {
 	Role string
 }
 
-//logic
+// logic
 type ProductUseCase interface {
 	InsertProduct(newProduct Product) (result Product, err error)
 	DeleteProduct(productID int) (row int, err error)
@@ -33,7 +33,7 @@ type ProductUseCase interface {
 	UpdateData(data Product, idProduct, idFromToken int) (row int, err error)
 }
 
-//query
+// query
 type ProductData interface {
 	GetUser(idProduct int) (result Product, err error) //buat ambil nama id
 	InsertProductDB(newProduct Product) (result Product, err error)

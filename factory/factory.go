@@ -1,6 +1,10 @@
 package factory
 
 import (
+	// pd "project3/group3/feature/product/data"
+	// productDelivery "project3/group3/feature/product/delivery"
+	// ps "project3/group3/feature/product/usecase"
+
 	ud "project3/group3/feature/users/data"
 	userDelivery "project3/group3/feature/users/delivery"
 	us "project3/group3/feature/users/usecase"
