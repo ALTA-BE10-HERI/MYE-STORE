@@ -13,6 +13,10 @@ import (
 	cartDelivery "project3/group3/feature/carts/delivery"
 	cs "project3/group3/feature/carts/usecase"
 
+	od "project3/group3/feature/orders/data"
+	orderDelivery "project3/group3/feature/orders/delivery"
+	os "project3/group3/feature/orders/usecase"
+
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
@@ -35,4 +39,10 @@ func InitFactory(e *echo.Echo, db *gorm.DB) {
 	cartCase := cs.New(cartData)
 	cartHandler := cartDelivery.New(cartCase)
 	cartDelivery.RouteCart(e, cartHandler)
+
+	orderData := od.New(db)
+	orderCase := os.New(orderData)
+	orderHandler := orderDelivery.New(orderCase)
+	orderDelivery.RouteOrder(e, orderHandler)
+
 }

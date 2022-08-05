@@ -6,6 +6,7 @@ import (
 	"project3/group3/config"
 
 	cartData "project3/group3/feature/carts/data"
+	orderData "project3/group3/feature/orders/data"
 	productData "project3/group3/feature/products/data"
 	userData "project3/group3/feature/users/data"
 
@@ -29,6 +30,6 @@ func InitDB(cfg *config.AppConfig) *gorm.DB {
 }
 
 func MigrateData(db *gorm.DB) {
-	db.AutoMigrate(userData.User{}, productData.Product{}, cartData.Cart{})
+	db.AutoMigrate(userData.User{}, productData.Product{}, cartData.Cart{}, orderData.Order{})
 
 }
