@@ -36,12 +36,21 @@ type UserOrder struct {
 	Role    string
 	Address string
 }
+type OrderDetail struct {
+	Name       string
+	Email      string
+	Qty        int
+	TotalPrice int
+}
 
 //logic
 type OrderUseCase interface {
 	ConfirmData(idOrder, idFromToken int) (row int, err error)
 	CancelData(idOrder, idFromToken int) (row int, err error)
 	GetAllData(limit, offset int) (data []Order, err error)
+	GetProduct(idProduct int) (data OrderDetail, err error)
+	CreateData(data Order) (row int, err error)
+	GetUser(idUser int) (OrderDetail, error)
 }
 
 //query
@@ -49,6 +58,9 @@ type OrderData interface {
 	ConfirmOrder(idOrder, idFromToken int) (row int, err error)
 	CancelOrder(idOrder, idFromToken int) (row int, err error)
 	SelectData(limit, offset int) (data []Order, err error)
+	GetUser(idUser int) (data OrderDetail, err error)
+	GetProduct(idProduct int) (data OrderDetail, err error)
+	InsertData(data Order) (row int, err error)
 }
 
 //handler
@@ -56,4 +68,5 @@ type OrderHandler interface {
 	ConfirmStatus() echo.HandlerFunc
 	CancelStatus() echo.HandlerFunc
 	GetAllData() echo.HandlerFunc
+	InsertOrder() echo.HandlerFunc
 }

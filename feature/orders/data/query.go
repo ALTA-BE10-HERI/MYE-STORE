@@ -2,6 +2,7 @@ package data
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"project3/group3/domain"
 
@@ -100,4 +101,40 @@ func (od *orderData) SelectData(limit, offset int) (data []domain.Order, err err
 	}
 
 	return ParseToArr(dataOrder), nil
+}
+
+func (od *orderData) GetProduct(idProduct int) (data domain.OrderDetail, err error) {
+	var product domain.Product
+	result := od.db.Where("id = ?", idProduct).First(&product)
+
+	if result.Error != nil {
+		return domain.OrderDetail{}, err
+	}
+
+	if result.RowsAffected != 1 {
+		return domain.OrderDetail{}, fmt.Errorf("failed to check user")
+	}
+
+	data.TotalPrice = product.Price
+	data.Qty = product.Stock
+	fmt.Println("data product :", product)
+	return data, err
+}
+
+func (od *orderData) GetUser(idUser int) (data domain.OrderDetail, err error) {
+	var user domain.User
+	result := od.db.Where("id = ?", idUser).First(&user)
+
+	if result.Error != nil {
+		return domain.OrderDetail{}, result.Error
+	}
+
+	if result.RowsAffected != 1 {
+		return domain.OrderDetail{}, fmt.Errorf("failed to check user")
+	}
+
+	data.Name = user.Name
+	data.Email = user.Email
+
+	return data, err
 }
